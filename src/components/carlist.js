@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
-import Addcar from './Addcar';
-import EditCar from './EditCar';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Snackbar from '@material-ui/core/Snackbar';
+import React, { useState, useEffect } from "react"
+import Addcar from './Addcar'
+import EditCar from './EditCar'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
+import Snackbar from '@material-ui/core/Snackbar'
 
 
 
 
 export default function Carlist() {
-    const [cars, setCars] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [cars, setCars] = useState([])
+    const [open, setOpen] = useState(false)
 
-    useEffect(() => fetchData(), []);
+    useEffect(() => fetchData(), [])
 
     const fetchData = () => {
         fetch('https://carstockrest.herokuapp.com/cars')
         .then(response => response.json())
         .then(data => setCars(data._embedded.cars))
-    };
+    }
 
     const deleteCar = (link) => {
         if (window.confirm('Are you sure?')) {
@@ -31,7 +29,7 @@ export default function Carlist() {
         .then(res => handleClick())
         .catch(err => console.error(err))
         }
-    };
+    }
 
     const saveCar = (car) => {
         fetch('https://carstockrest.herokuapp.com/cars', {
@@ -43,7 +41,7 @@ export default function Carlist() {
         })
         .then(res => fetchData())
         .catch(err => console.error(err))
-    };
+    }
 
     const updateCar = (car, link) => {
         fetch(link, {
@@ -57,7 +55,7 @@ export default function Carlist() {
         .catch(err => console.error(err))
     }
 
-    const handleClick = () => setOpen(true);
+    const handleClick = () => setOpen(true)
 
     const columns =  [
         {
@@ -103,7 +101,7 @@ export default function Carlist() {
                             </IconButton>
                             
         },
-    ];
+    ]
     
     return (
         <div>
@@ -119,5 +117,5 @@ export default function Carlist() {
         onClose={() => setOpen(false)}
         message="Car deleted"/>
         </div>
-    );
+    )
 }

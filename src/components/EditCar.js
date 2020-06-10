@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
+import React, { useState } from 'react'
+import IconButton from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 
 export default function EditCar(props) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false)
     const [car, setCar] = useState({
         brand:'',
         model:'',
@@ -18,7 +18,7 @@ export default function EditCar(props) {
         fuel:'',
         year:'',
         price:''
-    });
+    })
 
     const handleClickOpen = () => {
     
@@ -31,20 +31,20 @@ export default function EditCar(props) {
         price:props.car.price
     })
       setOpen(true)
-    };
+    }
     
-    const handleClose = () => setOpen(false);
-    const handleInputChange = (event) => setCar({...car, [event.target.name]: event.target.value});
+    const handleClose = () => setOpen(false)
+    const handleInputChange = (event) => setCar({...car, [event.target.name]: event.target.value})
     
     const addCar = () => {
-        console.log(props.car);
-        props.saveCar(car);
-        handleClose();
+        console.log(props.car)
+        props.saveCar(car)
+        handleClose()
     }
     
     const updateCar = () => {
-      props.updateCar(car, props.car._links.car.href);
-      handleClose();
+      props.updateCar(car, props.car._links.car.href)
+      handleClose()
     }
 
     return(
