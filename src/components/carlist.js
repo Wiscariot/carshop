@@ -5,14 +5,13 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import Snackbar from '@material-ui/core/Snackbar'
-
+import Snackbar from './Snackbar'
 
 
 
 export default function Carlist() {
     const [cars, setCars] = useState([])
-    const [open, setOpen] = useState(false)
+    const [snackbarOpen, setOpenSnackbar] = useState(false)
 
     useEffect(() => fetchData(), [])
 
@@ -26,7 +25,7 @@ export default function Carlist() {
         if (window.confirm('Are you sure?')) {
         fetch(link, {method: 'DELETE'})
         .then(res => fetchData())
-        .then(res => handleClick())
+        .then(res => showMessage())
         .catch(err => console.error(err))
         }
     }
@@ -55,7 +54,7 @@ export default function Carlist() {
         .catch(err => console.error(err))
     }
 
-    const handleClick = () => setOpen(true)
+    const showMessage = () => setOpenSnackbar(true)
 
     const columns =  [
         {
@@ -107,15 +106,7 @@ export default function Carlist() {
         <div>
             <Addcar saveCar={saveCar} />
             <ReactTable data={cars} columns={columns} filterable={true} />
-            <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-        message="Car deleted"/>
+            <Snackbar />
         </div>
     )
 }

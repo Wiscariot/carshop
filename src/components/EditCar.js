@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 
 
 export default function EditCar(props) {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const [car, setCar] = useState({
         brand:'',
         model:'',
@@ -29,15 +29,15 @@ export default function EditCar(props) {
         fuel:props.car.fuel,
         year:props.car.year,
         price:props.car.price
-    })
+      })
       setOpen(true)
     }
     
     const handleClose = () => setOpen(false)
+    
     const handleInputChange = (event) => setCar({...car, [event.target.name]: event.target.value})
     
     const addCar = () => {
-        console.log(props.car)
         props.saveCar(car)
         handleClose()
     }
@@ -48,16 +48,16 @@ export default function EditCar(props) {
     }
 
     return(
-        <div>
-      <IconButton onClick={handleClickOpen} size="small" aria-label="delete">
-        <EditIcon />
-      </IconButton>
+      <div>
+        <IconButton onClick={handleClickOpen} size="small" aria-label="delete">
+          <EditIcon />
+        </IconButton>
+      
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        
-        <DialogTitle id="form-dialog-title">Add car</DialogTitle>
-        
-        <DialogContent>
+          <DialogTitle id="form-dialog-title">Add car</DialogTitle>
           
+          <DialogContent>
+            
           <TextField
             autoFocus
             margin="dense"
